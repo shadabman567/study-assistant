@@ -37,20 +37,20 @@ export default function App() {
   const { status, data } = state;
   return (
     <main>
-      <h1><mark>Study</mark> assistant</h1>
+      <h1>Shadab’s <span>study desk</span></h1><p className="sub">Paste your notes, get cards and a quiz.</p>
       <form onSubmit={submit}>
-        <label htmlFor="notes">Your notes or topic</label>
+        <label htmlFor="notes">Your notes</label>
         <textarea id="notes" rows={7} value={text} onChange={(e) => setText(e.target.value)}
           placeholder="Paste lecture notes, or type a topic like “causes of World War I”." />
         <div className="row">
-          <button type="submit" disabled={status === 'loading'}>{status === 'loading' ? 'Generating…' : 'Make study set'}</button>
+          <button type="submit" disabled={status === 'loading'}>{status === 'loading' ? 'Building…' : 'Build my cards'}</button>
           {status === 'loading' && <button type="button" className="ghost" onClick={cancel}>Cancel</button>}
         </div>
       </form>
 
       <section aria-live="polite">
-        {status === 'idle' && <p className="empty">Paste some notes above to get flashcards and a quiz.</p>}
-        {status === 'loading' && <p className="loading"><span className="spinner" />Reading your notes and writing questions…</p>}
+        {status === 'idle' && <p className="empty">Nothing here yet. Paste notes above and I will build your cards.</p>}
+        {status === 'loading' && <p className="loading"><span className="spinner" />Going through your notes…</p>}
         {status === 'error' && (
           <div className="error" role="alert">
             <p>{state.message}</p>

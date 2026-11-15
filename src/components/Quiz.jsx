@@ -36,7 +36,7 @@ export default function Quiz({ questions }) {
       <ul className="options">
         {q.options.map((o, n) => {
           const cls = picked === null ? '' : n === q.answerIndex ? 'correct' : n === picked ? 'wrong' : '';
-          return <li key={n}><button className={cls} disabled={picked !== null} onClick={() => pick(n)}>{o}</button></li>;
+          return <li key={n}><button className={cls} disabled={picked !== null} onClick={() => pick(n)}><b>{'ABCDEF'[n]}</b>{o}</button></li>;
         })}
       </ul>
       {picked !== null && (

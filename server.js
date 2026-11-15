@@ -1,5 +1,7 @@
 // Small proxy: keeps the API key on the server and never in the browser bundle.
 import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 const { API_KEY, BASE_URL = 'https://api.groq.com/openai/v1', MODEL = 'llama-3.3-70b-versatile', PORT = 8787 } = process.env;
 
@@ -41,5 +43,7 @@ app.post('/api/generate', async (req, res) => {
     clearTimeout(timer);
   }
 });
-
+const dist = path.join(path.dirname(fileURLToPath(import.meta.url)), 'dist');
+app.use(express.static(dist));
+app.get('*', (_req, res) => res.sendFile(path.join(dist, 'index.html')));
 app.listen(PORT, () => console.log(`API on http://localhost:${PORT}`));

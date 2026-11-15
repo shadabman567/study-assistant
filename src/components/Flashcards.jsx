@@ -17,12 +17,12 @@ export default function Flashcards({ cards }) {
   }, [n]);
 
   if (!n) return <p className="empty">No flashcards were generated. Try again.</p>;
-  const c = cards[i];
+    const c = cards[i];
   return (
     <div>
-      <button className={`card ${flipped ? 'back' : ''}`} onClick={() => setFlipped((f) => !f)} aria-label="Flip card">
-        <small>{flipped ? 'Answer' : 'Question'}</small>
-        <span>{flipped ? c.back : c.front}</span>
+      <button className={`card ${flipped ? 'flipped' : ''}`} onClick={() => setFlipped((f) => !f)} aria-label="Flip card">
+        <span className="face front"><small>Question</small>{c.front}</span>
+        <span className="face back"><small>Answer</small>{c.back}</span>
       </button>
       <div className="row between">
         <button className="ghost" onClick={() => go(-1)}>Previous</button>
